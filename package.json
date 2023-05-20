@@ -5,7 +5,8 @@
   "description": "billingApp",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dev": "npx electronmon ."
   },
   "repository": {
     "type": "git",

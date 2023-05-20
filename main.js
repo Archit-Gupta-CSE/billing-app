@@ -1,12 +1,18 @@
 const path = require("path");
 const { app, BrowserWindow } = require("electron");
 
+const isDev = process.env.NODE_ENV !== "production";
+
 function createMainWindow() {
   const mainWindow = new BrowserWindow({
     title: "Billing App",
-    width: 600,
-    height: 700,
+    width: isDev ? 1000 : 700,
+    height: 800,
   });
+
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
 
   mainWindow.loadFile(path.join(__dirname, "./public/index.html"));
 }

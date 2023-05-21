@@ -11,6 +11,11 @@
   </head>
   <body>
     <div class="container">
+      <img
+        class="watermark"
+        src="C:\Users\gupta\OneDrive\Desktop\Billing app\public\assets\logo1.png"
+        alt="Watermark Image"
+      />
       <table
         class="prescription border-dark borderth"
         data-prescription_id="<?php echo $presc->prescription_id; ?>"
@@ -118,10 +123,12 @@
                     >+91</span
                   >
                   <input
-                    type="text"
-                    class="form-control"
+                    type="number"
+                    class="form-control no-arrow"
                     id="validationDefaultUsername"
                     aria-describedby="inputGroupPrepend2"
+                    min="0"
+                    max="9999999999"
                     required
                   />
                 </div>
@@ -151,8 +158,8 @@
                   >Pin code</label
                 >
                 <input
-                  type="text"
-                  class="form-control"
+                  type="number"
+                  class="form-control no-arrow"
                   id="validationDefault05"
                   required
                 />
@@ -192,7 +199,14 @@
                   <label class="form-check-label" for="fcheck"> Female </label>
                 </div>
                 <div class="col-1">
-                  <input class="form-control" type="text" id="patient_age" />
+                  <input
+                    class="form-control no-arrow"
+                    type="number"
+                    id="patient_age"
+                    min="1"
+                    max="150"
+                    required
+                  />
                 </div>
               </div>
             </div>
@@ -204,11 +218,6 @@
           </form>
         </div>
       </div>
-      <img
-        class="watermark"
-        src="C:\Users\gupta\OneDrive\Desktop\Billing app\public\assets\logo1.png"
-        alt="Watermark Image"
-      />
     </div>
 
     <script src="js/bootstrap.min.js"></script>

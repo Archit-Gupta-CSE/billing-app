@@ -1,11 +1,11 @@
-const path = require("path");
-const { app, BrowserWindow } = require("electron");
+const path = require('path');
+const { app, BrowserWindow } = require('electron');
 
-const isDev = process.env.NODE_ENV !== "production";
+const isDev = process.env.NODE_ENV !== 'production';
 
 function createMainWindow() {
   const mainWindow = new BrowserWindow({
-    title: "Billing App",
+    title: 'Billing App',
     width: isDev ? 1000 : 700,
     height: 800,
   });
@@ -14,21 +14,20 @@ function createMainWindow() {
     mainWindow.webContents.openDevTools();
   }
 
-  mainWindow.loadFile(path.join(__dirname, "./public/index.html"));
+  mainWindow.loadFile(path.join(__dirname, './public/index.html'));
 }
 
 app.whenReady().then(() => {
   createMainWindow();
 
-  app.on("activate", () => {
+  app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createMainWindow();
     }
   });
 });
-
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
     app.quit();
   }
 });

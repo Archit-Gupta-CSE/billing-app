@@ -6,10 +6,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
     <title>Billing App</title>
   </head>
   <body>
-    <h1 class="text-center">Hello from billing App</h1>
+    <div class="container">
+      <table
+        class="prescription border-dark borderth"
+        data-prescription_id="<?php echo $presc->prescription_id; ?>"
+        border="1"
+        style="background-color: white"
+      >
+        <tbody>
+          <tr height="15%">
+            <td colspan="2">
+              <div class="header">
+                <div class="logo col-6">
+                  <img
+                    src="C:\Users\gupta\OneDrive\Desktop\Billing app\public\assets\logo1.png"
+                  />
+                </div>
+
+                <div class="credentials col" style="text-align: right">
+                  <h4 style="color: navy">
+                    Dr. Sachin Gupta<br />डॉ. सचिन गुप्ता
+                  </h4>
+
+                  <small
+                    ><p>MBBS,DNB(Ortho.), MNAMS</p>
+                    <p style="color: #0c4db4">
+                      <b> Orthopaedic Consultant & Surgeon </b>
+                    </p>
+                    <p>Trauma, Spine & Joint Specailist</p>
+
+                    <p style="font-size: 130%; color: #0c4db4">
+                      <b>हड्डी रोग विशेषज्ञ</b>
+                    </p>
+                  </small>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="container p-4">
+        <div class="mb-3">
+          <form class="row g-3" id="billForm">
+            <div class="row p-3">
+              <label for="billNumber" class="form-label">Bill Number</label>
+              <div class="col-3">
+                <input
+                  type="text"
+                  id="billNumber"
+                  name="billNumber"
+                  value="B0001"
+                  readonly
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="row p-3">
+              <div class="col-md-4">
+                <label for="validationDefault01" class="form-label"
+                  >First name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault01"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefault02" class="form-label"
+                  >Last name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault02"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="validationDefaultUsername" class="form-label"
+                  >Phone number</label
+                >
+                <div class="input-group">
+                  <span class="input-group-text" id="inputGroupPrepend2"
+                    >+91</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="validationDefaultUsername"
+                    aria-describedby="inputGroupPrepend2"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row p-3">
+              <div class="col-md-6">
+                <label for="validationDefault03" class="form-label">City</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault03"
+                  required
+                />
+              </div>
+              <div class="col-md-3">
+                <label for="validationDefault04" class="form-label"
+                  >State</label
+                >
+                <select class="form-select" id="validationDefault04" required>
+                  <option selected disabled value="">Choose...</option>
+                  <option>...</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="validationDefault05" class="form-label"
+                  >Pin code</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationDefault05"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row p-3">
+              <div class="row">
+                <div class="col-4">
+                  <label class="form-label">Gender</label>
+                </div>
+                <div class="col-3">
+                  <label class="form-label" for="patient_age">Age</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-check col-2">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    id="mcheck"
+                    checked
+                    required
+                  />
+
+                  <label class="form-check-label" for="mcheck"> Male </label>
+                </div>
+                <div class="form-check col-2">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="flexRadioDefault"
+                    id="fcheck"
+                    checked
+                    required
+                  />
+                  <label class="form-check-label" for="fcheck"> Female </label>
+                </div>
+                <div class="col-2">
+                  <input class="form-control" type="text" id="patient_age" />
+                </div>
+              </div>
+            </div>
+            <label for="cal">Date & Time of Entry</label>
+            <div class="col-2">
+              <input type="datetime-local" id="cal" />
+            </div>
+            <div class="mx-auto" style="width: 200px">
+              <button class="btn btn-primary btn-lg" type="submit">
+                Submit form
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <script src="js/bootstrap.min.js"></script>
+    <script src="C:\Users\gupta\OneDrive\Desktop\Billing app\test.js"></script>
   </body>
 </html>

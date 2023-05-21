@@ -30,7 +30,7 @@ document
       billNumberField.value = defaultBillNumber;
     } else {
       billCount++; // Increment bill count
-      var newBillNumber = 'B' + billCount.toString().padStart(4, '0');
+      var newBillNumber = '#B' + billCount.toString().padStart(4, '0');
       billNumberField.value = newBillNumber;
     }
     var now = new Date();

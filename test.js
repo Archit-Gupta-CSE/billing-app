@@ -1,21 +1,42 @@
 window.addEventListener('load', () => {
+  // Get the current system time
   var now = new Date();
-  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
 
-  /* remove second/millisecond if needed - credit ref. https://stackoverflow.com/questions/24468518/html5-input-datetime-local-default-value-of-today-and-current-time#comment112871765_60884408 */
-  now.setMilliseconds(null);
-  now.setSeconds(null);
+  // Format the time as "HH:mm"
+  var formattedTime =
+    (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
 
-  document.getElementById('cal').value = now.toISOString().slice(0, -1);
+  // Set the default value for the time input
+  var timeInput = document.getElementById('timeInput');
+  timeInput.value = formattedTime;
+
+  // Get the date input element
+  var dateInput = document.getElementById('dateInput');
+  // Format the date as "YYYY-MM-DD" and set it as the default value of the date input
+  var formattedDate = now.toISOString().slice(0, 10);
+  dateInput.value = formattedDate;
+  var billNumberField = document.getElementById('billNumber');
+  var defaultBillNumber =
+    now.getFullYear().toString().slice(-2) +
+    now.getMonth().toString().padStart(2, '0') +
+    '0000';
+  billNumberField.value = defaultBillNumber;
 });
-var billCount = 1; // Initial bill count
-var defaultBillNumber = 'B0001'; // Default bill number
+var now = new Date();
+var billCount = 0; // Initial bill count
+var defaultBillNumber =
+  now.getFullYear().toString().slice(-2) +
+  now.getMonth().toString().padStart(2, '0') +
+  '0000'; // Default bill number
 
 document
   .getElementById('billForm')
   .addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent form submission
-
+    // Get the current system time
+    var now = new Date();
     var formInputs = document
       .getElementById('billForm')
       .getElementsByTagName('input');
@@ -24,21 +45,41 @@ document
         formInputs[i].value = '';
       }
     }
+    var selectElement = document.getElementById('inputState');
+    selectElement.selectedIndex = 0;
+    var selectElement = document.getElementById('inputDistrict');
+    selectElement.selectedIndex = 0;
 
     var billNumberField = document.getElementById('billNumber');
     if (billNumberField.value === '') {
       billNumberField.value = defaultBillNumber;
     } else {
       billCount++; // Increment bill count
-      var newBillNumber = '#B' + billCount.toString().padStart(4, '0');
+      var newBillNumber =
+        now.getFullYear().toString().slice(-2) +
+        now.getMonth().toString().padStart(2, '0') +
+        billCount.toString().padStart(4, '0');
       billNumberField.value = newBillNumber;
     }
-    var now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
 
-    /* remove second/millisecond if needed - credit ref. https://stackoverflow.com/questions/24468518/html5-input-datetime-local-default-value-of-today-and-current-time#comment112871765_60884408 */
-    now.setMilliseconds(null);
-    now.setSeconds(null);
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
 
-    document.getElementById('cal').value = now.toISOString().slice(0, -1);
+    // Format the time as "HH:mm"
+    var formattedTime =
+      (hours < 10 ? '0' : '') +
+      hours +
+      ':' +
+      (minutes < 10 ? '0' : '') +
+      minutes;
+
+    // Set the default value for the time input
+    var timeInput = document.getElementById('timeInput');
+    timeInput.value = formattedTime;
+
+    // Get the date input element
+    var dateInput = document.getElementById('dateInput');
+    // Format the date as "YYYY-MM-DD" and set it as the default value of the date input
+    var formattedDate = now.toISOString().slice(0, 10);
+    dateInput.value = formattedDate;
   });

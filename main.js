@@ -1,6 +1,6 @@
 const path = require('path');
-const { app, BrowserWindow } = require('electron');
-
+const { app, BrowserWindow, ipcMain } = require('electron');
+const fs = require('fs');
 const isDev = process.env.NODE_ENV !== 'production';
 
 function createMainWindow() {
@@ -15,6 +15,16 @@ function createMainWindow() {
   }
 
   mainWindow.loadFile(path.join(__dirname, './public/index.html'));
+
+  // Listen for the 'store-data' event from the renderer process
+  ipcMain.on('store-data', (event, data) => {
+    // Save the form data to a file
+    const jsonData = JSON.stringify(data);
+    fs.writeFile('form-data.json', jsonData, err => {
+      if (err) throw err;
+      console.log('Form data saved successfully!');
+    });
+  });
 }
 
 app.whenReady().then(() => {

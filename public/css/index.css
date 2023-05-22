@@ -56,10 +56,10 @@ body {
   padding: 1px 1px;
 }
 h1.small {
-  line-height: 0.5;
+  line-height: 0.8;
 }
 p.small {
-  line-height: 0.8;
+  line-height: 0.5;
 }
 
 .credentials small {
@@ -92,10 +92,16 @@ p.small {
   width: 200px;
   height: 200px;
   transform: translate(-50%, -50%);
-  opacity: 0.35; /* Adjust the opacity as per your preference */
+  opacity: 0.1; /* Adjust the opacity as per your preference */
 }
 .textboxclass {
+  width: 160px;
+}
+.textboxm {
   width: 80px;
+}
+.textboxf {
+  width: 90px;
 }
 .no-arrow {
   -moz-appearance: textfield;

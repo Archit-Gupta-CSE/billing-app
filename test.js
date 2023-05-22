@@ -1,3 +1,22 @@
+const form = document.getElementById('billForm');
+const submitButton = document.getElementById('finalSubmit');
+
+// document.addEventListener('submit', event => {
+//   event.preventDefault(); // Prevent form submission
+
+//   // Get the form values
+//   const formData = new FormData(form);
+
+//   // Convert form data to an object
+//   const data = {};
+//   for (let [key, value] of formData.entries()) {
+//     data[key] = value;
+//   }
+
+//   // Send the form data to the main process
+//   ipcRenderer.send('formSubmit', data);
+// });
+
 window.addEventListener('load', () => {
   // Get the current system time
   var now = new Date();
@@ -36,6 +55,17 @@ document
   .addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent form submission
     // Get the current system time
+    // Get the form values
+    const formData = new FormData(form);
+
+    // Convert form data to an object
+    const data = {};
+    for (let [key, value] of formData.entries()) {
+      data[key] = value;
+    }
+
+    // Send the form data to the main process
+    ipcRenderer.send('formSubmit', data);
     var now = new Date();
     var formInputs = document
       .getElementById('billForm')

@@ -1,6 +1,5 @@
 const path = require('path');
 const { app, BrowserWindow, ipcMain } = require('electron');
-const fs = require('fs');
 const isDev = process.env.NODE_ENV !== 'production';
 
 function createMainWindow() {
@@ -8,6 +7,9 @@ function createMainWindow() {
     title: 'Billing App',
     width: isDev ? 1000 : 700,
     height: 800,
+    webPreferences: {
+      preload: path.join(__dirname, './preload.js'),
+    },
   });
 
   if (isDev) {
@@ -16,14 +18,10 @@ function createMainWindow() {
 
   mainWindow.loadFile(path.join(__dirname, './public/index.html'));
 
-  // Listen for the 'store-data' event from the renderer process
-  ipcMain.on('store-data', (event, data) => {
-    // Save the form data to a file
-    const jsonData = JSON.stringify(data);
-    fs.writeFile('form-data.json', jsonData, err => {
-      if (err) throw err;
-      console.log('Form data saved successfully!');
-    });
+  // Listen for the 'formSubmit' event from the renderer process
+  ipcMain.on('formSubmit', (event, data) => {
+    // Handle the form data
+    console.log(data); // Example: Log the form data to the console
   });
 }
 

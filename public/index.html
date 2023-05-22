@@ -11,66 +11,77 @@
   </head>
   <body>
     <div class="container">
-      <img
-        class="watermark"
-        src="C:\Users\gupta\OneDrive\Desktop\Billing app\public\assets\logo1.png"
-        alt="Watermark Image"
-      />
-      <table
-        class="prescription border-dark borderth"
-        data-prescription_id="<?php echo $presc->prescription_id; ?>"
-        border="1"
-        style="background-color: white"
-      >
-        <tbody>
-          <tr height="15%">
-            <td colspan="2">
-              <div class="header">
-                <div class="logo col-3 border-0">
-                  <img
-                    src="C:\Users\gupta\OneDrive\Desktop\Billing app\public\assets\logo1.png"
-                  />
-                </div>
-                <div class="col-5">
-                  <h1 style="color: rgb(10, 143, 124); text-align: center">
-                    <b>KAILASH GYAN</b>
-                  </h1>
-                  <p
-                    style="
-                      font-size: 150%;
-                      color: rgb(32, 26, 26);
-                      text-align: center;
-                    "
-                  >
-                    <b>OrthoCare Center</b>
-                  </p>
-                </div>
-
-                <div class="credentials col" style="text-align: right">
-                  <h4 style="color: navy">
-                    Dr. Sachin Gupta<br />डॉ. सचिन गुप्ता
-                  </h4>
-
-                  <small
-                    ><p>MBBS,DNB(Ortho.), MNAMS</p>
-                    <p style="color: #0c4db4">
-                      <b> Orthopaedic Consultant & Surgeon </b>
-                    </p>
-                    <p>Trauma, Spine & Joint Specailist</p>
-
-                    <p style="font-size: 130%; color: #0c4db4">
-                      <b>हड्डी रोग विशेषज्ञ</b>
-                    </p>
-                  </small>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
       <div class="container p-4">
         <div class="mb-3">
           <form class="row g-3" id="billForm">
+            <img
+              class="watermark"
+              src="C:\Users\gupta\OneDrive\Desktop\Billing app\public\assets\logo1.png"
+              alt="Watermark Image"
+            />
+            <table
+              class="prescription border-dark borderth"
+              data-prescription_id="<?php echo $presc->prescription_id; ?>"
+              border="1"
+              style="background-color: white"
+            >
+              <tbody>
+                <tr height="15%">
+                  <td colspan="2">
+                    <div class="header">
+                      <div class="logo col-3 border-0">
+                        <img
+                          src="C:\Users\gupta\OneDrive\Desktop\Billing app\public\assets\logo1.png"
+                        />
+                      </div>
+                      <div class="col-5">
+                        <h1
+                          class="small"
+                          style="
+                            color: rgb(0, 68, 125);
+                            text-align: center;
+                            font-size: xx-large;
+                          "
+                        >
+                          <b>KAILASH GYAN</b>
+                        </h1>
+                        <p
+                          class="small"
+                          style="
+                            font-size: 150%;
+                            color: rgb(32, 26, 26);
+                            text-align: center;
+                          "
+                        >
+                          <b>OrthoCare Center</b>
+                        </p>
+                      </div>
+
+                      <div class="credentials col" style="text-align: right">
+                        <h4 style="color: navy">
+                          Dr. Sachin Gupta<br />डॉ. सचिन गुप्ता
+                        </h4>
+
+                        <small
+                          ><p>MBBS,DNB(Ortho.), MNAMS</p>
+                          <p style="color: #0c4db4">
+                            <b> Orthopaedic Consultant & Surgeon </b>
+                          </p>
+                          <p>Trauma, Spine & Joint Specailist</p>
+
+                          <p style="font-size: 130%; color: #0c4db4">
+                            <b>हड्डी रोग विशेषज्ञ</b>
+                          </p>
+                        </small>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <div class="container p-4">
+        <div class="mb-3">
+          <form class="row g-3" id="billForm"> -->
             <div class="row p-3">
               <div class="col-8">
                 <label for="billNumber" class="form-label">Bill Number</label>

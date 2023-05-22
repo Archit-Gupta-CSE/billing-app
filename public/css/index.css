@@ -53,8 +53,15 @@ body {
 .credentials p {
   line-height: 1.1em;
   margin: 0 0 0px 0;
-  padding: 1px 0px;
+  padding: 1px 1px;
 }
+h1.small {
+  line-height: 0.5;
+}
+p.small {
+  line-height: 0.8;
+}
+
 .credentials small {
   margin: 0;
   padding: 0;

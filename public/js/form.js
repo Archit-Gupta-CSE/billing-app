@@ -1,4 +1,6 @@
 const form = document.getElementById("billForm");
+const searchWithPhone = document.getElementById("phoneSearch");
+const phoneInput = document.getElementById("validationDefaultPhone");
 
 var now = new Date();
 var billCount = 0; // Initial bill count
@@ -47,7 +49,7 @@ form.addEventListener("submit", function (event) {
   }
 
   // Send the form data to the main process
-  ipcRenderer.send("formSubmit", data);
+  ipcRenderer.sendFormData(data);
 
   var now = new Date();
   var formInputs = form.getElementsByTagName("input");
@@ -91,4 +93,16 @@ form.addEventListener("submit", function (event) {
   // Format the date as "YYYY-MM-DD" and set it as the default value of the date input
   var formattedDate = now.toISOString().slice(0, 10);
   dateInput.value = formattedDate;
+});
+
+searchWithPhone.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const phoneNumber = phoneInput.value;
+
+  ipcRenderer.sendPhoneInfo(phoneNumber);
+});
+
+ipcRenderer.receiveUserInfo((data) => {
+  console.log(data);
 });

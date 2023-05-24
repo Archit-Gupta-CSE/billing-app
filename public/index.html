@@ -146,23 +146,38 @@
                   />
                 </div>
                 <div class="col-md-3">
-                  <label for="validationDefaultUsername" class="form-label"
+                  <label for="validationDefaultPhone" class="form-label"
                     >Phone number</label
                   >
                   <div class="input-group">
-                    <span class="input-group-text" id="inputGroupPrepend2"
-                      >+91</span
-                    >
                     <input
                       type="number"
                       class="form-control no-arrow"
-                      id="validationDefaultUsername"
+                      id="validationDefaultPhone"
                       aria-describedby="inputGroupPrepend2"
                       min="1000000000"
                       max="9999999999"
                       name="phnum"
                       required
                     />
+                    <span
+                      class="input-group-text"
+                      style="cursor: pointer"
+                      id="phoneSearch"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-search"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                        />
+                      </svg>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -172,7 +187,7 @@
                   type="text"
                   class="form-control"
                   id="inputAddress"
-                  name="addressm"
+                  name="address"
                 />
               </div>
               <div class="row p-3">
@@ -193,7 +208,7 @@
                   <select
                     class="form-select"
                     id="inputState"
-                    name="State"
+                    name="state"
                     required
                   >
                     <option value="">Select State</option>
@@ -772,7 +787,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="flexRadioDefault"
+                    name="sex"
                     id="mcheck"
                     value="male"
                     checked
@@ -785,7 +800,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="flexRadioDefault"
+                    name="sex"
                     id="fcheck"
                     value="female"
                     required
@@ -796,7 +811,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="flexRadioDefault"
+                    name="sex"
                     id="ntmcheck"
                     value="not to be mentioned"
                     required
@@ -812,7 +827,7 @@
                     id="patient_age"
                     min="1"
                     max="150"
-                    name="Age"
+                    name="age"
                     required
                   />
                 </div>

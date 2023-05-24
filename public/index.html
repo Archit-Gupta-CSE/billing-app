@@ -10,10 +10,10 @@
     <title>Billing App</title>
   </head>
   <body>
-    <div class="container">
+    
       <div class="container p-4">
         <div class="mb-3">
-          <form class="row g-3" id="billForm" name="billMainForm">
+          <form method="post" action="" class="row g-3" id="billForm" name="billMainForm">
             <img
               class="watermark"
               src="C:\Users\gupta\OneDrive\Desktop\Billing app\public\assets\logo1.png"
@@ -92,10 +92,10 @@
             <div class="container p-4">
         <div class="mb-3">
             <div class="row p-3">
-              <div class="col-7">
+              <div class="col-6">
                 <label for="billNumber" class="form-label">Registration Number</label>
                 <div class="input-group textboxclass">
-                <span class="input-group-text" id="inputGroupPrepend2"
+                <span class="input-group-text" id="inputGroupPrepend1"
                     >RGID</span
                   >  
                 <input
@@ -107,14 +107,16 @@
                 />
                 </div>
               </div>
-              <div class="col-2">
+              <div class="col-3">
                 <label for="timeInput" class="form-label">Time</label>
+                <div class="textboxclasstime">
                 <input
                   type="time"
                   id="timeInput"
                   name="time"
                   class="form-control"
                 />
+                </div>
               </div>
               <div class="col-3">
                 <label for="dateInput" class="form-label">Date</label>
@@ -123,7 +125,18 @@
             </div>
             <br />
             <div class="row p-3">
-              <div class="col-md-4">
+              <div class="col-2">
+                <label class="form-label">Initials</label>
+                <div class="text_box_initials">
+                 <select class="form-select"name="name_with_initials" id="initialsn" required>
+                  <option value="">....</option>
+                  <option value="Mr">Mr.</option>
+                  <option value="Mrs">Mrs.</option>
+                  <option value="Miss">Miss.</option>
+                </select>
+              </div>
+              </div>
+              <div class="col-md-3">
                 <label for="validationDefault01" class="form-label"
                   >First name</label
                 >
@@ -135,7 +148,7 @@
                   required
                 />
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <label for="validationDefault02" class="form-label"
                   >Last name</label
                 >
@@ -147,11 +160,10 @@
                   required
                 />
               </div>
-              <div class="col-md-3">
-                <label for="validationDefaultUsername" class="form-label"
-                  >Phone number</label
-                >
-                <div class="input-group">
+              <div class="col-md-4">
+                <label for="validationDefaultPhoneNumber" class="form-label"
+                  >Phone number</label>
+                <div class="input-group textboxclasspn">
                   <span class="input-group-text" id="inputGroupPrepend2"
                     >+91</span
                   >
@@ -170,18 +182,22 @@
             </div>
             <div class="form-group">
               <label for="inputAddress">Address</label>
-              <input type="text" class="form-control" id="inputAddress" name="addressm"/>
+              <input type="text" class="form-control" id="inputAddress" name="addressm" required/>
             </div>
             <div class="row p-3">
               <div class="col-md-3">
-                <label for="validationDefault03" class="form-label">City</label>
+                <label for="validationDefault03" class="form-label">Door Number</label>
+                <div class="input-group textboxclassDno">
+                  <span class="input-group-text" id="inputGroupPrepend56"
+                    >#</span>
                 <input
                   type="text"
                   class="form-control"
                   id="validationDefault03"
-                  name="city"
+                  name="Dno"
                   required
                 />
+                </div>
               </div>
               <div class="col-md-3">
     <label for="inputState" class="form-label">State</label>
@@ -763,36 +779,41 @@
                     type="radio"
                     name="flexRadioDefault"
                     id="ntmcheck"
-                    value="not to be mentioned"
+                    value="notToBeMentioned"
                     required
                   />
                   <label class="form-check-label" for="fcheck"> Not To Mention </label>
                 </div>
                 <div class="col-1">
+                  <div class="textboxclassage">
                   <input
                     class="form-control no-arrow"
                     type="number"
                     id="patient_age"
                     min="1"
-                    max="150"
+                    max="110"
                     name="Age"
                     required
                   />
+                  </div>
                 </div>
               </div>
             </div>
             <div class="mx-auto p-3" style="width: 200px">
-              <button class="btn btn-primary btn-lg" type="submit" id="finalSubmit" name="fsubmit">
+              <button class="btn btn-primary btn-lg" type="submit" id="finalSubmit">
                 Submit form
               </button>
             </div>
+          <div class="mx-auto p-3" style="width: 200px">
+              <button class="btn btn-primary btn-lg" type="button" id="print">
+                Print Form
+              </button>
+            </div>  
           </form>
+          
         </div>
       </div>
-    </div>
-
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script> 
     <script src="C:\Users\gupta\OneDrive\Desktop\Billing app\test.js"></script>
-   
   </body>
 </html>

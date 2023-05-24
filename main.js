@@ -1,5 +1,5 @@
 const path = require('path');
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const isDev = process.env.NODE_ENV !== 'production';
 
 function createMainWindow() {
@@ -17,6 +17,12 @@ function createMainWindow() {
   }
 
   mainWindow.loadFile(path.join(__dirname, './public/index.html'));
+
+  // Listen for the 'formSubmit' event from the renderer process
+  ipcMain.on('formSubmit', (event, data) => {
+    // Handle the form data
+    console.log(data); // Example: Log the form data to the console
+  });
 }
 
 app.whenReady().then(() => {
@@ -28,7 +34,6 @@ app.whenReady().then(() => {
     }
   });
 });
-
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();

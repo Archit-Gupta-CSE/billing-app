@@ -1,6 +1,5 @@
 const path = require('path');
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
-const print = require('electron-print').print;
 const isDev = process.env.NODE_ENV !== 'production';
 
 function createMainWindow() {

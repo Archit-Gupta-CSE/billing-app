@@ -103,6 +103,22 @@ p.small {
 .textboxf {
   width: 90px;
 }
+.text_box_initials {
+  width: 120px;
+}
+
+.textboxclasstime {
+  width: 125px;
+}
+.textboxclasspn {
+  width: 190px;
+}
+.textboxclassDno {
+  width: 140px;
+}
+.textboxclassage {
+  width: 60px;
+}
 .no-arrow {
   -moz-appearance: textfield;
 }

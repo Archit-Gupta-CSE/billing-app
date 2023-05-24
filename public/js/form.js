@@ -1,5 +1,11 @@
 const form = document.getElementById('billForm');
-const submitButton = document.getElementById('finalSubmit');
+
+var now = new Date();
+var billCount = 0; // Initial bill count
+var defaultBillNumber =
+  now.getFullYear().toString().slice(-2) +
+  (now.getMonth() + 1).toString().padStart(2, '0') +
+  '0000'; // Default bill number
 
 window.addEventListener('load', () => {
   // Get the current system time
@@ -23,28 +29,35 @@ window.addEventListener('load', () => {
   var billNumberField = document.getElementById('billNumber');
   var defaultBillNumber =
     now.getFullYear().toString().slice(-2) +
-    (now.getMonth() + 1).toString().padStart(2, '0') +
+    now.getMonth().toString().padStart(2, '0') +
     '0000';
   billNumberField.value = defaultBillNumber;
 });
-var now = new Date();
-var billCount = 0; // Initial bill count
-var defaultBillNumber =
-  now.getFullYear().toString().slice(-2) +
-  now.getMonth().toString().padStart(2, '0') +
-  '0000'; // Default bill number
 
-document.addEventListener('submit', function (event) {
+form.addEventListener('submit', function (event) {
   event.preventDefault(); // Prevent form submission
+  // Get the current system time
+  // Get the form values
+  const formData = new FormData(form);
 
-  var formInputs = document
-    .getElementById('billForm')
-    .getElementsByTagName('input');
+  // Convert form data to an object
+  const data = {};
+  for (let [key, value] of formData.entries()) {
+    data[key] = value;
+  }
+
+  // Send the form data to the main process
+  ipcRenderer.send('formSubmit', data);
+
+  var now = new Date();
+  var formInputs = form.getElementsByTagName('input');
+
   for (var i = 0; i < formInputs.length; i++) {
     if (formInputs[i].id !== 'billNumber') {
       formInputs[i].value = '';
     }
   }
+
   var selectElement = document.getElementById('inputState');
   selectElement.selectedIndex = 0;
   var selectElement = document.getElementById('inputDistrict');
@@ -57,7 +70,7 @@ document.addEventListener('submit', function (event) {
     billCount++; // Increment bill count
     var newBillNumber =
       now.getFullYear().toString().slice(-2) +
-      now.getMonth().toString().padStart(2, '0') +
+      (now.getMonth() + 1).toString().padStart(2, '0') +
       billCount.toString().padStart(4, '0');
     billNumberField.value = newBillNumber;
   }

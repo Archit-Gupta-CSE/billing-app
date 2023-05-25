@@ -1,7 +1,7 @@
-@import url('../assets/Roboto-Regular.ttf');
+@import url("../assets/Roboto-Regular.ttf");
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 body {
   transition: all 0.3s ease;
@@ -123,9 +123,6 @@ p.small {
 }
 .textboxclassage {
   width: 60px;
-}
-.no-arrow {
-  -moz-appearance: textfield;
 }
 .no-arrow::-webkit-inner-spin-button {
   display: none;

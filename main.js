@@ -1,24 +1,25 @@
-const path = require("path");
-const { app, BrowserWindow, ipcMain } = require("electron");
-const sqlite = require("sqlite3").verbose();
+const path = require('path');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const sqlite = require('sqlite3').verbose();
 
-const userAppData = app.getPath("appData");
-const dbPath = path.join(userAppData, "database.db");
-const isDev = process.env.NODE_ENV !== "production";
+const userAppData = app.getPath('appData');
+const dbPath = path.join(userAppData, 'database.db');
+const isDev = process.env.NODE_ENV !== 'production';
 
-const db = new sqlite.Database(dbPath, (err) => {
+const db = new sqlite.Database(dbPath, err => {
   if (err) {
     console.error(err);
   }
+  console.log(dbPath);
 });
 
 function createMainWindow() {
   const mainWindow = new BrowserWindow({
-    title: "Billing App",
+    title: 'Billing App',
     width: isDev ? 1000 : 700,
     height: 800,
     webPreferences: {
-      preload: path.join(__dirname, "./preload.js"),
+      preload: path.join(__dirname, './preload.js'),
     },
   });
 
@@ -26,42 +27,43 @@ function createMainWindow() {
     mainWindow.webContents.openDevTools();
   }
 
-  mainWindow.loadFile(path.join(__dirname, "./public/index.html"));
+  mainWindow.loadFile(path.join(__dirname, './public/index.html'));
 }
 
-ipcMain.on("findUser", (event, data) => {
+ipcMain.on('findUser', (event, data) => {
   db.get(`SELECT * FROM users WHERE phoneNumber = ?`, [data], (err, rows) => {
     if (err) {
       console.error(err);
     } else {
-      event.sender.send("userInfoResult", rows);
+      event.sender.send('userInfoResult', rows);
     }
   });
 });
 
-ipcMain.on("formSubmit", (event, data) => {
+ipcMain.on('formSubmit', (event, data) => {
   if (Object.keys(data).length < 13) {
-    console.error("Incomplete data");
+    console.error('Incomplete data');
   } else {
     console.log(data);
     db.run(
-      `INSERT INTO users (firstName, lastName, address, district, state, phoneNumber, time, date, pincode, sex, age, billNumber)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO users (firstName, lastName, address, district, state, phoneNumber, time, date, pincode, sex, age, billNumber, initials)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        data["fname"],
-        data["lname"],
-        data["address"],
-        data["district"],
-        data["state"],
-        data["phnum"],
-        data["time"],
-        data["date"],
-        data["pincode"],
-        data["sex"],
-        data["age"],
-        data["billNumber"],
+        data['firstName'],
+        data['lastName'],
+        data['address'],
+        data['district'],
+        data['state'],
+        data['phoneNumber'],
+        data['time'],
+        data['date'],
+        data['pincode'],
+        data['sex'],
+        data['age'],
+        data['billNumber'],
+        data['initials'],
       ],
-      (err) => {
+      err => {
         if (err) {
           console.error(err);
         }
@@ -87,7 +89,8 @@ app.whenReady().then(() => {
       pincode VARCHAR(255),
       sex VARCHAR(20),
       age VARCHAR(20),
-      billNumber VARCHAR(100)
+      billNumber VARCHAR(100),
+      initials VARCHAR(20)
     )
     `,
     (res, err) => {
@@ -99,16 +102,16 @@ app.whenReady().then(() => {
     }
   );
 
-  app.on("activate", () => {
+  app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createMainWindow();
     }
   });
 });
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    db.close((err) => {
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    db.close(err => {
       if (err) {
         console.error(err);
       }

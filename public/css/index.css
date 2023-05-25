@@ -6,6 +6,10 @@
 body {
   transition: all 0.3s ease;
 }
+#billForm {
+  position: absolute;
+  z-index: 1;
+}
 .wrapper {
   height: 100vh;
   width: 100vw;
@@ -92,7 +96,8 @@ p.small {
   width: 200px;
   height: 200px;
   transform: translate(-50%, -50%);
-  opacity: 0.1; /* Adjust the opacity as per your preference */
+  opacity: 0.2; /* Adjust the opacity as per your preference */
+  z-index: 0;
 }
 .textboxclass {
   width: 160px;

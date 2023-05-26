@@ -1,12 +1,12 @@
-const path = require("path");
-const { app, BrowserWindow, ipcMain } = require("electron");
-const sqlite = require("sqlite3").verbose();
+const path = require('path');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const sqlite = require('sqlite3').verbose();
 
-const userAppData = app.getPath("appData");
-const dbPath = path.join(userAppData, "database.db");
-const isDev = process.env.NODE_ENV !== "production";
+const userAppData = app.getPath('appData');
+const dbPath = path.join(userAppData, 'database.db');
+const isDev = process.env.NODE_ENV !== 'production';
 
-const db = new sqlite.Database(dbPath, (err) => {
+const db = new sqlite.Database(dbPath, err => {
   if (err) {
     console.error(err);
   }
@@ -15,11 +15,11 @@ const db = new sqlite.Database(dbPath, (err) => {
 
 function createMainWindow() {
   const mainWindow = new BrowserWindow({
-    title: "Billing App",
+    title: 'Billing App',
     width: isDev ? 1000 : 700,
     height: 800,
     webPreferences: {
-      preload: path.join(__dirname, "./preload.js"),
+      preload: path.join(__dirname, './preload.js'),
     },
   });
 
@@ -27,56 +27,57 @@ function createMainWindow() {
     mainWindow.webContents.openDevTools();
   }
 
-  mainWindow.loadFile(path.join(__dirname, "./public/index.html"));
+  mainWindow.loadFile(path.join(__dirname, './public/index.html'));
 }
 
-ipcMain.on("findUser", (event, data) => {
+ipcMain.on('findUser', (event, data) => {
   db.get(`SELECT * FROM users WHERE phoneNumber = ?`, [data], (err, rows) => {
     if (err) {
       console.error(err);
     } else {
       if (rows) {
-        const originalDate = new Date(rows["date"]);
+        const originalDate = new Date(rows['date']);
         const now = new Date();
 
         diffDate = Math.abs(now - originalDate);
         totalDays = Math.ceil(diffDate / (1000 * 60 * 60 * 24));
         if (totalDays > 4) {
-          rows["newPrice"] = "200";
+          rows['newPrice'] = 'Rs. 200';
         } else {
-          rows["newPrice"] = "0";
+          rows['newPrice'] = 'Rs. 0';
         }
       }
       console.log(rows);
-      event.sender.send("userInfoResult", rows);
+      event.sender.send('userInfoResult', rows);
     }
   });
 });
 
-ipcMain.on("formSubmit", (event, data) => {
-  if (Object.keys(data).length < 13) {
-    console.error("Incomplete data");
+ipcMain.on('formSubmit', (event, data) => {
+  if (Object.keys(data).length < 14) {
+    console.error('Incomplete data');
   } else {
     console.log(data);
     db.run(
-      `INSERT INTO users (firstName, lastName, address, district, state, phoneNumber, time, date, pincode, sex, age, billNumber, initials)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO users (firstName, lastName, address, district, state, phoneNumber, time, date, pincode, sex, age, billNumber, initials, newPrice)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        data["firstName"],
-        data["lastName"],
-        data["address"],
-        data["district"],
-        data["state"],
-        data["phoneNumber"],
-        data["time"],
-        data["date"],
-        data["pincode"],
-        data["sex"],
-        data["age"],
-        data["billNumber"],
-        data["initials"],
+        data['firstName'],
+        data['lastName'],
+        data['address'],
+        data['district'],
+        data['state'],
+        data['phoneNumber'],
+        data['time'],
+        data['date'],
+        data['pincode'],
+        data['sex'],
+        data['age'],
+        data['billNumber'],
+        data['initials'],
+        data['newPrice'],
       ],
-      (err) => {
+      err => {
         if (err) {
           console.error(err);
         }
@@ -103,7 +104,8 @@ app.whenReady().then(() => {
       sex VARCHAR(20),
       age VARCHAR(20),
       billNumber VARCHAR(100),
-      initials VARCHAR(20)
+      initials VARCHAR(20),
+      newPrice VARCHAR(255)
     )
     `,
     (res, err) => {
@@ -115,16 +117,16 @@ app.whenReady().then(() => {
     }
   );
 
-  app.on("activate", () => {
+  app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createMainWindow();
     }
   });
 });
 
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    db.close((err) => {
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    db.close(err => {
       if (err) {
         console.error(err);
       }

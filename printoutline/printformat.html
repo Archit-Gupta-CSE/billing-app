@@ -4,27 +4,48 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./print.css" />
     <title>Prescription</title>
   </head>
   <body>
-    <style>
-      body {
-        background-image: url('../public/assets/WhatsApp Image 2023-05-18 at 15.52.13 (1).jpeg');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: contain;
-        background-position: center;
-      }
-    </style>
-    <form>
-      <div class="row">
-        <div class="col">
-          <input type="text" class="form-control" placeholder="First name" />
+    <div class="container">
+      <form id="printpresc">
+        <style>
+          body {
+            background-image: url('../public/assets/WhatsApp Image 2023-05-18 at 15.52.13 (1).jpeg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: contain;
+            background-position: center;
+          }
+        </style>
+
+        <div class="row">
+          <div class="col textfieldname">
+            <label for="firstN" style="font-size: 70%">Name</label>
+            <input
+              type="text"
+              id="firstN"
+              style="font-size: 70%"
+              class="textboxname bg-transparent"
+              name="firstName"
+            />
+          </div>
         </div>
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Last name" />
+        <div class="row">
+          <div class="col textfieldage">
+            <label for="patient_age" style="font-size: 70%">Age</label>
+            <input
+              type="text"
+              id="patient_age"
+              style="font-size: 70%"
+              class="textboxage bg-transparent"
+              name="age"
+            />
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </body>
 </html>

@@ -10,7 +10,7 @@
     <title>Billing App</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container m-3">
       <table
         class="prescription border-dark borderth"
         style="background-color: white"
@@ -19,7 +19,7 @@
         <tbody>
           <tr height="15%">
             <td colspan="2">
-              <div class="header">
+              <div class="header col-12">
                 <div class="logo col-3 border-0">
                   <img src="assets/logo1.png" />
                 </div>
@@ -82,7 +82,7 @@
       <form class="row" id="billForm" name="billMainForm">
         <div class="mb-3">
           <div class="row p-3">
-            <div class="col-6">
+            <div class="col-md-6">
               <label for="billNumber" class="form-label"
                 >Registration Number</label
               >
@@ -99,16 +99,16 @@
                 />
               </div>
             </div>
-            <div class="col-3">
+            <div class="col-md-3">
               <label for="timeInput" class="form-label">Time</label>
               <input
                 type="time"
                 id="timeInput"
                 name="time"
-                class="form-control textboxclasstime"
+                class="form-control textboxclasstime bg-transparent"
               />
             </div>
-            <div class="col-3">
+            <div class="col-md-2">
               <label for="dateInput" class="form-label">Date</label>
               <input
                 type="date"
@@ -135,7 +135,7 @@
                 <option value="Miss">Miss.</option>
               </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-lg-3">
               <label for="validationDefault01" class="form-label"
                 >First name</label
               >
@@ -153,7 +153,7 @@
               >
               <input
                 type="text"
-                class="form-control"
+                class="form-control bg-transparent"
                 id="validationDefault02"
                 name="lastName"
                 required
@@ -201,7 +201,7 @@
                 <label for="inputAddress">Address</label>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control textboxadd"
                   id="inputAddress"
                   name="address"
                   required
@@ -781,15 +781,60 @@
             </div>
           </div>
         </div>
-        <div class="mx-auto p-3" style="width: 200px">
-          <button
-            class="btn btn-primary btn-lg"
-            type="submit"
-            id="finalSubmit"
-            name="fsubmit"
-          >
-            Submit form
-          </button>
+        <div class="row p-3">
+          <div class="col-10">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span
+                  class="input-group-text"
+                  id="basic-addon3"
+                  style="font-size: 120%"
+                  >Consultation (or) Procedure</span
+                >
+              </div>
+              <input
+                type="text"
+                class="form-control text-muted text-center col-2"
+                aria-label="Rs amount (with dot and two decimal places)"
+                value="Consultation Charges (fixed) "
+                style="font-size: 120%"
+                id="PandC"
+                readonly
+              />
+              <div class="input-group-append">
+                <input
+                  type="text"
+                  class="input-group-text col-7"
+                  id="newPrice"
+                  name="newPrice"
+                  style="font-size: 120%"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row m-5">
+          <div class="m-3" style="width: 200px">
+            <button
+              class="btn btn-success btn-lg"
+              type="submit"
+              id="finalSubmit"
+              name="fsubmit"
+            >
+              Submit form
+            </button>
+          </div>
+          <div class="m-3" style="width: 200px">
+            <button
+              class="btn btn-secondary btn-lg"
+              type="button"
+              id="printForm"
+              name="printF"
+            >
+              Print form
+            </button>
+          </div>
         </div>
         <div
           id="alertContainer"

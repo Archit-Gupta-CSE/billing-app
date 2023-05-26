@@ -34,6 +34,9 @@ window.addEventListener('load', () => {
     (now.getMonth() + 1).toString().padStart(2, '0') +
     '0000';
   billNumberField.value = defaultBillNumber;
+  var price = document.getElementById('newPrice');
+  var defaultPrice = 'Rs. 400';
+  price.value = defaultPrice;
 });
 
 form.addEventListener('submit', function (event) {
@@ -93,6 +96,11 @@ form.addEventListener('submit', function (event) {
   // Format the date as "YYYY-MM-DD" and set it as the default value of the date input
   var formattedDate = now.toISOString().slice(0, 10);
   dateInput.value = formattedDate;
+  var text23 = document.getElementById('PandC');
+  text23.value = 'Consultation Charges (fixed) ';
+  var price = document.getElementById('newPrice');
+  var defaultPrice = 'Rs. 400';
+  price.value = defaultPrice;
 });
 
 searchWithPhone.addEventListener('click', event => {
@@ -127,6 +135,8 @@ ipcRenderer.receiveUserInfo(response => {
   } else {
     showAlert("User doesn't exists!!");
   }
+  var text23 = document.getElementById('PandC');
+  text23.value = 'Consultation Charges (fixed) ';
 });
 function showAlert(message, alertType) {
   // Create the alert element
@@ -143,3 +153,21 @@ function showAlert(message, alertType) {
     alertElement.remove();
   }, 3000); // 3000 milliseconds = 3 seconds (adjust as needed)
 }
+const printButton = document.getElementById('printForm');
+printButton.addEventListener('click', () => {
+  // Retrieve values from the initial form
+  const name =
+    document.getElementById('validationDefault01').value +
+    ' ' +
+    document.getElementById('validationDefault02').value;
+  const age = document.getElementById('patient_age').value;
+
+  // Create a new window to display the populated form
+  const newWindow = window.open('..\\printoutline\\printformat.html');
+
+  // When the new window is fully loaded, populate the form with the retrieved values
+  newWindow.onload = () => {
+    newWindow.document.getElementById('firstN').value = name;
+    newWindow.document.getElementById('patient_age').value = age;
+  };
+});

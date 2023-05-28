@@ -35,9 +35,6 @@ window.addEventListener('load', () => {
     (now.getMonth() + 1).toString().padStart(2, '0') +
     '0000';
   billNumberField.value = defaultBillNumber;
-  // var price = document.getElementById('newPrice');
-  // var defaultPrice = 'Rs. 400';
-  // price.value = defaultPrice;
 });
 
 form.addEventListener('submit', function (event) {
@@ -89,8 +86,6 @@ ipcRenderer.receiveUserInfo(response => {
   } else {
     showAlert("User doesn't exists!!");
   }
-  var text23 = document.getElementById('PandC');
-  text23.value = 'Consultation Charges (fixed) ';
 });
 
 function showAlert(message, alertType) {
@@ -137,6 +132,8 @@ resetForm.addEventListener('click', event => {
   selectElement.selectedIndex = 0;
   var selectElement = document.getElementById('inputDistrict');
   selectElement.selectedIndex = 0;
+  var selectElement = document.getElementById('inputPandC');
+  selectElement.selectedIndex = 0;
 
   var billNumberField = document.getElementById('billNumber');
   if (billNumberField.value === '') {
@@ -166,9 +163,4 @@ resetForm.addEventListener('click', event => {
   // Format the date as "YYYY-MM-DD" and set it as the default value of the date input
   var formattedDate = now.toISOString().slice(0, 10);
   dateInput.value = formattedDate;
-  var text23 = document.getElementById('PandC');
-  text23.value = 'Consultation Charges (fixed) ';
-  var price = document.getElementById('newPrice');
-  var defaultPrice = 'Rs. 400';
-  price.value = defaultPrice;
 });

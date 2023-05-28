@@ -10,7 +10,7 @@
     <title>Billing App</title>
   </head>
   <body>
-    <div class="container m-3">
+    <div class="container">
       <table
         class="prescription border-dark borderth"
         style="background-color: white"
@@ -761,12 +761,10 @@
                 type="radio"
                 name="sex"
                 id="ntmcheck"
-                value="notToBeMentioned"
+                value="Others"
                 required
               />
-              <label class="form-check-label" for="fcheck">
-                Not To Mention
-              </label>
+              <label class="form-check-label" for="fcheck"> Others </label>
             </div>
             <div class="col-1">
               <input
@@ -782,7 +780,7 @@
           </div>
         </div>
         <div class="row p-3">
-          <div class="col-10">
+          <div class="col-12">
             <div class="input-group">
               <div class="input-group-prepend">
                 <span
@@ -835,15 +833,27 @@
               Print form
             </button>
           </div>
+          <div class="m-3" style="width: 200px">
+            <button
+              class="btn btn-warning btn-lg"
+              type="button"
+              id="resetForm"
+              name="printF"
+            >
+              Reset Form
+            </button>
+          </div>
         </div>
         <div
           id="alertContainer"
-          class="container mt-3 text-danger text-center bg-warning"
+          class="text-danger"
           style="font-size: 130%; font-weight: bolder"
         ></div>
       </form>
     </div>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/pdfLib.js"></script>
     <script src="js/form.js"></script>
+    <script src="js/generatePDF.js"></script>
   </body>
 </html>

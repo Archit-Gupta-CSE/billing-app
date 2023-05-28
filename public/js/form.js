@@ -1,6 +1,7 @@
 const form = document.getElementById('billForm');
 const searchWithPhone = document.getElementById('phoneSearch');
 const phoneInput = document.getElementById('validationDefaultPhone');
+const resetForm = document.getElementById('resetForm');
 
 var now = new Date();
 var billCount = 0; // Initial bill count
@@ -53,7 +54,76 @@ form.addEventListener('submit', function (event) {
 
   // Send the form data to the main process
   ipcRenderer.sendFormData(data);
+  showAlert('Submitted SuccessFully!!');
+});
 
+searchWithPhone.addEventListener('click', event => {
+  event.preventDefault();
+
+  const phoneNumber = phoneInput.value;
+
+  ipcRenderer.sendPhoneInfo(phoneNumber);
+});
+
+ipcRenderer.receiveUserInfo(response => {
+  console.log(response);
+  if (response) {
+    const f2 = document.querySelector('#billForm');
+    const radio2 = document.getElementsByName('sex');
+    Object.entries(response).forEach(([key, value2]) => {
+      const input = f2.querySelector(`[name="${key}"]`);
+      if (input) {
+        input.value = value2;
+      }
+      if (key === 'sex') {
+        for (const radioButton of radio2) {
+          if (radioButton.value === value2) {
+            // Update the checked property based on the retrieved value
+            radioButton.checked = true;
+          } else {
+            radioButton.checked = false;
+          }
+        }
+      }
+    });
+  } else {
+    showAlert("User doesn't exists!!");
+  }
+  var text23 = document.getElementById('PandC');
+  text23.value = 'Consultation Charges (fixed) ';
+});
+
+function showAlert(message, alertType) {
+  // Create the alert element
+  const alertElement = document.createElement('div');
+  alertElement.classList.add('alert', `alert-${alertType}`);
+  alertElement.textContent = message;
+
+  // Append the alert element to the container
+  const alertContainer = document.getElementById('alertContainer');
+  alertContainer.appendChild(alertElement);
+
+  // Automatically dismiss the alert after a certain time (optional)
+  setTimeout(() => {
+    alertElement.remove();
+  }, 3000); // 3000 milliseconds = 3 seconds (adjust as needed)
+  // Position the alert near the top-right corner
+  const windowWidth = window.innerWidth;
+  const alertWidth = alertElement.offsetWidth;
+  const alertHeight = alertElement.offsetHeight;
+
+  const alertPositionX = windowWidth - alertWidth - 10;
+  const alertPositionY = 10;
+
+  alertElement.style.position = 'fixed';
+  alertElement.style.right = `${alertPositionX}px`;
+  alertElement.style.top = `${alertPositionY}px`;
+  alertElement.style.backgroundColor = 'white';
+  alertElement.style.border = '1px solid black';
+}
+
+resetForm.addEventListener('click', event => {
+  event.preventDefault();
   var now = new Date();
   var formInputs = form.getElementsByTagName('input');
 
@@ -101,73 +171,4 @@ form.addEventListener('submit', function (event) {
   var price = document.getElementById('newPrice');
   var defaultPrice = 'Rs. 400';
   price.value = defaultPrice;
-});
-
-searchWithPhone.addEventListener('click', event => {
-  event.preventDefault();
-
-  const phoneNumber = phoneInput.value;
-
-  ipcRenderer.sendPhoneInfo(phoneNumber);
-});
-
-ipcRenderer.receiveUserInfo(response => {
-  console.log(response);
-  if (response) {
-    const f2 = document.querySelector('#billForm');
-    const radio2 = document.getElementsByName('sex');
-    Object.entries(response).forEach(([key, value2]) => {
-      const input = f2.querySelector(`[name="${key}"]`);
-      if (input) {
-        input.value = value2;
-      }
-      if (key === 'sex') {
-        for (const radioButton of radio2) {
-          if (radioButton.value === value2) {
-            // Update the checked property based on the retrieved value
-            radioButton.checked = true;
-          } else {
-            radioButton.checked = false;
-          }
-        }
-      }
-    });
-  } else {
-    showAlert("User doesn't exists!!");
-  }
-  var text23 = document.getElementById('PandC');
-  text23.value = 'Consultation Charges (fixed) ';
-});
-function showAlert(message, alertType) {
-  // Create the alert element
-  const alertElement = document.createElement('div');
-  alertElement.classList.add('alert', `alert-${alertType}`);
-  alertElement.textContent = message;
-
-  // Append the alert element to the container
-  const alertContainer = document.getElementById('alertContainer');
-  alertContainer.appendChild(alertElement);
-
-  // Automatically dismiss the alert after a certain time (optional)
-  setTimeout(() => {
-    alertElement.remove();
-  }, 3000); // 3000 milliseconds = 3 seconds (adjust as needed)
-}
-const printButton = document.getElementById('printForm');
-printButton.addEventListener('click', () => {
-  // Retrieve values from the initial form
-  const name =
-    document.getElementById('validationDefault01').value +
-    ' ' +
-    document.getElementById('validationDefault02').value;
-  const age = document.getElementById('patient_age').value;
-
-  // Create a new window to display the populated form
-  const newWindow = window.open('..\\printoutline\\printformat.html');
-
-  // When the new window is fully loaded, populate the form with the retrieved values
-  newWindow.onload = () => {
-    newWindow.document.getElementById('firstN').value = name;
-    newWindow.document.getElementById('patient_age').value = age;
-  };
 });

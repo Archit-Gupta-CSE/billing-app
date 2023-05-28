@@ -1,42 +1,33 @@
 .background {
   background-image: url('../public/assets/WhatsApp Image 2023-05-18 at 15.52.13 (1).jpeg');
   background-repeat: no-repeat;
-  background-size: 148mm 210mm; /* A5 size */
+  background-size: 8.268in 11.693in; /* A4 size */
   height: 100%; /* Adjust the height as needed */
   width: 100%; /* Adjust the width as needed */
 }
 
-form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* Set other styles for the form */
-}
 .textfieldname {
   position: fixed;
-  top: -205px;
-  left: -200px;
+  top: 215px;
+  left: 20px;
 }
 
 .textfieldage {
   position: fixed;
-  top: -165px;
-  left: -200px;
+  left: 20px;
+  top: 265px;
 }
 
 .textboxname {
-  position: absolute;
   padding: 0px;
   border: none;
-  border-bottom: 1.5px dotted #000;
+  border-bottom: 2px dotted #000;
   outline: none;
 }
 .textboxage {
-  position: absolute;
-  width: 140%;
   padding: 0px;
+  width: 2%;
   border: none;
-  border-bottom: 1.5px dotted #000;
+  border-bottom: 2px dotted #000;
   outline: none;
 }

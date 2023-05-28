@@ -31,24 +31,48 @@ function createMainWindow() {
 }
 
 ipcMain.on("findUser", (event, data) => {
-  db.get(`SELECT * FROM users WHERE phoneNumber = ?`, [data], (err, row) => {
+  db.get(`SELECT * FROM users WHERE phoneNumber = ?`, [data], (err, user) => {
     if (err) {
       console.error(err);
     } else {
-      if (row) {
-        db.get(
-          `SELECT procedure_name FROM procedures WHERE customer_id = ?`,
-          [row["phoneNumber"]],
+      let newPrice = "";
+      let last_procedure = "";
+      let check_flag = false;
+      if (user) {
+        db.all(
+          `SELECT * FROM procedures WHERE customer_id = ?`,
+          [user["phoneNumber"]],
           (err, procInfo) => {
             if (err) {
               console.error(err);
             }
-            console.log(procInfo);
+            if (procInfo.length > 0) {
+              procInfo.forEach((ele) => {
+                last_procedure = ele["procedure_name"];
+                if (
+                  ele["procedure_name"] === "consultationCharges" &&
+                  !check_flag
+                ) {
+                  check_flag = true;
+                  const originalDate = new Date(ele["procedure_date"]);
+                  const now = new Date();
+
+                  diffDate = Math.abs(now - originalDate);
+                  totalDays = Math.ceil(diffDate / (1000 * 60 * 60 * 24));
+
+                  if (totalDays > 4) {
+                    newPrice = "400";
+                  }
+                }
+              });
+              user["newPrice"] = newPrice;
+              user["procedure"] = last_procedure;
+              event.sender.send("userInfoResult", user);
+            }
           }
         );
       }
-      console.log(row);
-      event.sender.send("userInfoResult", row);
+      event.sender.send("userInfoResult", user);
     }
   });
 });
@@ -59,8 +83,8 @@ ipcMain.on("formSubmit", (event, data) => {
   } else {
     console.log(data);
     db.run(
-      `INSERT OR REPLACE INTO users (firstName, lastName, address, district, state, phoneNumber, time, date, pincode, sex, age, billNumber, initials)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT OR REPLACE INTO users (firstName, lastName, address, district, state, phoneNumber, time, pincode, sex, age, billNumber, initials)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         data["firstName"],
         data["lastName"],
@@ -69,7 +93,6 @@ ipcMain.on("formSubmit", (event, data) => {
         data["state"],
         data["phoneNumber"],
         data["time"],
-        data["date"],
         data["pincode"],
         data["sex"],
         data["age"],
@@ -85,9 +108,9 @@ ipcMain.on("formSubmit", (event, data) => {
     );
 
     db.run(
-      `INSERT INTO procedures (procedure_name, procedure_cost, customer_id)
-      VALUES (?, ?, ?)`,
-      [data["procedureName"], data["procedureCost"], data["phoneNumber"]],
+      `INSERT INTO procedures (procedure_name, procedure_date, procedure_cost, customer_id)
+      VALUES (?, ?, ?, ?)`,
+      [data["procedure"], data["date"], data["newPrice"], data["phoneNumber"]],
       (err) => {
         if (err) {
           console.error(err);
@@ -109,26 +132,33 @@ app.whenReady().then(() => {
       district VARCHAR(255),
       phoneNumber VARCHAR(255) PRIMARY KEY,
       time VARCHAR(255),
-      date VARCHAR(255),
       pincode VARCHAR(255),
       sex VARCHAR(20),
       age VARCHAR(20),
       billNumber VARCHAR(100),
-      initials VARCHAR(20),
-    )
-
-    CREATE TABLE IF NOT EXISTS procedures (
-      procedure_id INTEGER PRIMARY KEY AUTOINCREMENT,
-      procedure_name VARCHAR(255),
-      procedure_cost VARCHAR(255) NOT NULL,
-      customer_id VARCHAR(255) FOREIGN KEY REFERENCES users(phoneNumber)
+      initials VARCHAR(20)
     )
     `,
     (err) => {
       if (err) {
         console.error(err);
-      } else {
-        console.log(res);
+      }
+    }
+  );
+
+  db.run(
+    `CREATE TABLE IF NOT EXISTS procedures (
+      procedure_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      procedure_name VARCHAR(255),
+      procedure_date VARCHAR(255),
+      procedure_cost VARCHAR(255) NOT NULL,
+      customer_id VARCHAR(255),
+      FOREIGN KEY (customer_id) REFERENCES users(phoneNumber)
+    )
+    `,
+    (err) => {
+      if (err) {
+        console.error(err);
       }
     }
   );

@@ -204,7 +204,6 @@
                   class="form-control textboxadd"
                   id="inputAddress"
                   name="address"
-                  required
                 />
               </div>
             </div>
@@ -801,12 +800,13 @@
               />
               <div class="input-group-append">
                 <input
-                  type="text"
-                  class="input-group-text col-7"
+                  type="number"
+                  class="input-group-text col-7 no-arrow"
                   id="newPrice"
                   name="newPrice"
                   style="font-size: 120%"
-                  readonly
+                  min="0"
+                  required
                 />
               </div>
             </div>

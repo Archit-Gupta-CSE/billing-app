@@ -204,7 +204,6 @@
                   class="form-control textboxadd"
                   id="inputAddress"
                   name="address"
-                  required
                 />
               </div>
             </div>
@@ -779,6 +778,12 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-9"></div>
+          <div class="col">
+            <label style="font-size: 120%">&nbsp;Price:(in Rs.)&nbsp;</label>
+          </div>
+        </div>
         <div class="row p-3">
           <div class="col-12">
             <div class="input-group">
@@ -790,23 +795,32 @@
                   >Consultation (or) Procedure</span
                 >
               </div>
-              <input
-                type="text"
-                class="form-control text-muted text-center col-2"
-                aria-label="Rs amount (with dot and two decimal places)"
-                value="Consultation Charges (fixed) "
+              <select
+                class="form-select text-muted text-center col-2"
                 style="font-size: 120%"
-                id="PandC"
-                readonly
-              />
+                id="inputPandC"
+                name="state"
+                required
+              >
+                <option value="">Select Procedure</option>
+
+                <option value="consultationCharges">
+                  Consultation Charges (fixed)
+                </option>
+                <option value="xRay">X-Ray</option>
+                <option value="pop">Plastering Charges</option>
+                <option value="meds">Medicines and Supply</option>
+                <option value="anyOther">Any Other</option>
+              </select>
               <div class="input-group-append">
                 <input
-                  type="text"
-                  class="input-group-text col-7"
+                  type="number"
+                  class="input-group-text col-7 no-arrow"
                   id="newPrice"
                   name="newPrice"
                   style="font-size: 120%"
-                  readonly
+                  min="0"
+                  required
                 />
               </div>
             </div>

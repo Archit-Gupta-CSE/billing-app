@@ -35,9 +35,9 @@ window.addEventListener('load', () => {
     (now.getMonth() + 1).toString().padStart(2, '0') +
     '0000';
   billNumberField.value = defaultBillNumber;
-  var price = document.getElementById('newPrice');
-  var defaultPrice = 'Rs. 400';
-  price.value = defaultPrice;
+  // var price = document.getElementById('newPrice');
+  // var defaultPrice = 'Rs. 400';
+  // price.value = defaultPrice;
 });
 
 form.addEventListener('submit', function (event) {

@@ -1,7 +1,7 @@
-@import url('../assets/Roboto-Regular.ttf');
+@import url("../assets/Roboto-Regular.ttf");
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 body {
   transition: all 0.3s ease;
@@ -10,25 +10,21 @@ body {
   position: absolute;
   z-index: 1;
 }
-.wrapper {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  background: red;
-  margin: 50px;
-}
+
 .prescription_form {
   background: white;
 }
+
 .prescription {
-  width: 115%;
+  width: 100%;
   margin: 0 auto;
   border: 1px solid lightgrey;
 }
+
 .prescription tr > td {
   padding: 15px;
 }
+
 .header {
   color: #333;
   width: 100%;
@@ -100,7 +96,7 @@ p.small {
   z-index: 0;
 }
 .textboxclass {
-  width: 160px;
+  width: 250px;
 }
 .textboxm {
   width: 80px;
@@ -117,7 +113,7 @@ p.small {
 } */
 
 .textboxclasstime {
-  width: 125px;
+  width: 150px;
 }
 .textboxclasspn {
   width: 190px;
@@ -126,7 +122,7 @@ p.small {
   width: 140px;
 }
 .textboxclassage {
-  width: 60px;
+  width: 100px;
 }
 .textboxadd {
   width: 1050px;

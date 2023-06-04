@@ -31,50 +31,54 @@ function createMainWindow() {
 }
 
 ipcMain.on("findUser", (event, data) => {
-  db.get(`SELECT * FROM users WHERE phoneNumber = ?`, [data], (err, user) => {
-    if (err) {
-      console.error(err);
-    } else {
-      let newPrice = "";
-      let last_procedure = "";
-      let check_flag = false;
-      if (user) {
-        db.all(
-          `SELECT * FROM procedures WHERE customer_id = ?`,
-          [user["phoneNumber"]],
-          (err, procInfo) => {
-            if (err) {
-              console.error(err);
-            }
-            if (procInfo.length > 0) {
-              procInfo.forEach((ele) => {
-                last_procedure = ele["procedure_name"];
-                if (
-                  ele["procedure_name"] === "consultationCharges" &&
-                  !check_flag
-                ) {
-                  check_flag = true;
-                  const originalDate = new Date(ele["procedure_date"]);
-                  const now = new Date();
+  db.get(
+    `SELECT * FROM users WHERE phoneNumber = ? OR billNumber = ?`,
+    [data, data],
+    (err, user) => {
+      if (err) {
+        console.error(err);
+      } else {
+        let newPrice = "";
+        let last_procedure = "";
+        let check_flag = false;
+        if (user) {
+          db.all(
+            `SELECT * FROM procedures WHERE customer_id = ?`,
+            [user["phoneNumber"]],
+            (err, procInfo) => {
+              if (err) {
+                console.error(err);
+              }
+              if (procInfo.length > 0) {
+                procInfo.forEach((ele) => {
+                  last_procedure = ele["procedure_name"];
+                  if (
+                    ele["procedure_name"] === "consultationCharges" &&
+                    !check_flag
+                  ) {
+                    check_flag = true;
+                    const originalDate = new Date(ele["procedure_date"]);
+                    const now = new Date();
 
-                  diffDate = Math.abs(now - originalDate);
-                  totalDays = Math.ceil(diffDate / (1000 * 60 * 60 * 24));
+                    diffDate = Math.abs(now - originalDate);
+                    totalDays = Math.ceil(diffDate / (1000 * 60 * 60 * 24));
 
-                  if (totalDays > 4) {
-                    newPrice = "400";
+                    if (totalDays > 4) {
+                      newPrice = "400";
+                    }
                   }
-                }
-              });
-              user["newPrice"] = newPrice;
-              user["procedure"] = last_procedure;
-              event.sender.send("userInfoResult", user);
+                });
+                user["newPrice"] = newPrice;
+                user["procedure"] = last_procedure;
+                event.sender.send("userInfoResult", user);
+              }
             }
-          }
-        );
+          );
+        }
+        event.sender.send("userInfoResult", user);
       }
-      event.sender.send("userInfoResult", user);
     }
-  });
+  );
 });
 
 ipcMain.on("formSubmit", (event, data) => {

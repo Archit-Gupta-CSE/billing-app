@@ -121,26 +121,29 @@ printButton.addEventListener('click', async event => {
     y: height - 13.9 * fontSize,
     size: fontSize,
   });
-  // //-- Amount Paid --
+  //-- Amount Paid --
 
-  // page.drawText('Consultation Charges(Paid): ', {
-  //   x: 297,
-  //   y: height - 55.2 * fontSize,
-  //   size: fontSize,
-  //   font: fontFamily,
-  // });
+  page.drawText('Consultation/Procedure Charges(Paid): ', {
+    x: 225,
+    y: height - 55.2 * fontSize,
+    size: fontSize,
+    font: fontFamily,
+  });
 
-  // page.drawText(pdfData['newPrice'], {
-  //   x: 502,
-  //   y: height - 55.2 * fontSize,
-  //   size: fontSize,
-  //   font: fontFamily,
-  // });
-  // page.drawText('..................', {
-  //   x: 492,
-  //   y: height - 55.4 * fontSize,
-  //   size: fontSize,
-  // });
+  page.drawText(
+    'Rs. ' + pdfData['newPrice'] + ' | ' + pdfData['patientHistory'],
+    {
+      x: 500,
+      y: height - 55.2 * fontSize,
+      size: fontSize,
+      font: fontFamily,
+    }
+  );
+  page.drawText('..................', {
+    x: 492,
+    y: height - 55.4 * fontSize,
+    size: fontSize,
+  });
   const modifiedPdfBytes = await pdfDoc.save();
   const blob = new Blob([modifiedPdfBytes], { type: 'application/pdf' });
 

@@ -170,7 +170,7 @@
               >
               <input
                 type="text"
-                class="form-control bg-transparent"
+                class="form-control"
                 id="validationDefault02"
                 name="lastName"
                 required
@@ -739,7 +739,7 @@
             </div>
           </div>
           <div class="row mt-3">
-            <div class="col-7">
+            <div class="col-7 p-3">
               <label class="form-label">Gender: </label>
 
               <input
@@ -771,7 +771,7 @@
                 value="Others"
                 required
               />
-              <label class="form-check-label" for="fcheck"> Others </label>
+              <label class="form-check-label" for="ntmcheck"> Others </label>
             </div>
             <div class="col-3">
               <label class="form-label" for="patient_age">Age: </label>
@@ -787,10 +787,48 @@
             </div>
           </div>
         </div>
+        <div class="row mt-3">
+          <div class="col-7 p-3">
+            <label class="form-label">Patient History:&nbsp;</label>
+
+            <input
+              class="form-check-input"
+              type="radio"
+              name="patientHistory"
+              id="freshPatient"
+              value="A"
+              checked
+              required
+            />
+
+            <label class="form-check-label" for="freshPatient"> A </label>
+
+            <input
+              class="form-check-input"
+              type="radio"
+              name="patientHistory"
+              id="review"
+              value="B"
+              required
+            />
+            <label class="form-check-label" for="review"> B </label>
+            <input
+              class="form-check-input"
+              type="radio"
+              name="patientHistory"
+              id="query"
+              value="C"
+              required
+            />
+            <label class="form-check-label" for="query"> C </label>
+          </div>
+        </div>
         <div class="row">
           <div class="col-9"></div>
           <div class="col">
-            <label style="font-size: 120%">&nbsp;Price:(in Rs.)&nbsp;</label>
+            <label style="font-size: 120%" class="form-label" for="newPrice"
+              >&nbsp;&nbsp;Price:(in Rs.)&nbsp;</label
+            >
           </div>
         </div>
         <div class="row p-3">
@@ -817,7 +855,10 @@
                   Consultation Charges (fixed)
                 </option>
                 <option value="xRay">X-Ray</option>
-                <option value="pop">Plastering Charges</option>
+                <option value="opd">OPD</option>
+                <option value="splint">Splint</option>
+                <option value="procd">Clinic Procedure</option>
+                <option value="injectables">Injectables</option>
                 <option value="meds">Medicines and Supply</option>
                 <option value="anyOther">Any Other</option>
               </select>
@@ -835,7 +876,7 @@
             </div>
           </div>
         </div>
-        <div class="row m-1">
+        <div class="row m-5">
           <div style="width: 200px">
             <button
               class="btn btn-success btn-lg"

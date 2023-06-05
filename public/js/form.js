@@ -1,6 +1,8 @@
 const form = document.getElementById("billForm");
 const searchWithPhone = document.getElementById("phoneSearch");
+const searchWithRGID = document.getElementById("rgidSearch");
 const phoneInput = document.getElementById("validationDefaultPhone");
+const rgidInput = document.getElementById("billNumber");
 const resetForm = document.getElementById("resetForm");
 
 var now = new Date();
@@ -64,6 +66,16 @@ searchWithPhone.addEventListener("click", (event) => {
   console.log(phoneNumber);
 
   ipcRenderer.sendPhoneInfo(phoneNumber);
+});
+
+searchWithRGID.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const value = rgidInput.value;
+
+  console.log(value);
+
+  ipcRenderer.sendPhoneInfo(value);
 });
 
 ipcRenderer.receiveUserInfo((response) => {
